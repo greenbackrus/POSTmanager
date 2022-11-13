@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\GeneralHelper.cs" />
+    <Compile Include="Helpers\User32Helper.cs" />
+    <Compile Include="Settings.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +66,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Handlers\Iiko\IikoBase.cs" />
+    <Compile Include="Handlers\RK7\RK7Base.cs" />
+    <Compile Include="Handlers\IApplicationStartable.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
