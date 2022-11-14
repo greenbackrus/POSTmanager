@@ -28,6 +28,7 @@ namespace POSTmanager.handlers
             _password = _context.UserRests
                 .Where(ur => ur.UserId == _user.Id && ur.RestId == _rest.Id)
                 .Select(mc => mc.Password)
+                .Single()
                 .ToString();
 
             // параметры окна для его поиска: класс и наименование 
@@ -43,24 +44,24 @@ namespace POSTmanager.handlers
             GeneralHelper.CopyDirectory($@"{_basesDirectory}\Rk7Manager", _restBaseDirectory, true);
         }
 
-        private void CreateIniFile(User currentUser, Rest currentRest)
+        private void CreateIniFile()
         {
             //TODO: pass server data from db 
             using (StreamWriter stream = new StreamWriter($@"{_restBaseDirectory}\rk7man.ini", false))
             {
                 stream.Write($@"[REFEDIT]
-                UserName={currentUser.Login}
-                Client={currentUser.Login}-%RANDOM%
-                Server={currentRest.ServerName}
+                UserName={_user.Login}
+                Client={_user.Login}-%RANDOM%
+                Server={_rest.ServerName}
                 LOCKONEDIT=0
                 LongTimeout=200000
                 [NETKERN]
                 PROTOCOLS=tcpsoc.dll
                 [TCPSOC]
                 LISTEN=0
-                PORT={currentRest.Port}
+                PORT={_rest.Port}
                 [TCPDNS]
-                {currentRest.ServerName}={currentRest.Ip}:{currentRest.Port}");
+                {_rest.ServerName}={_rest.Ip}:{_rest.Port}");
                 stream.Close();
             }
         }
@@ -116,7 +117,7 @@ namespace POSTmanager.handlers
         {
             CopyBaseDir();
             CreateBatFile();
-            //CreateIniFile();
+            CreateIniFile();
         }
 
         private void LoginRk7(string restName, string password) 
@@ -146,7 +147,6 @@ namespace POSTmanager.handlers
             IntPtr _panelContainer;
             IntPtr _maskEdit;
             IntPtr _passwordField;
-            IntPtr _loginField;
             IntPtr _okButton;
 
             _panelContainer = User32Helper.GetElementByName(hWindow, "TPabel", null);
