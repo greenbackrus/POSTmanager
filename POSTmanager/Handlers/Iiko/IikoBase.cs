@@ -1,12 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POSTmanager.handlers
 {
     internal class IikoBase : IApplicationStartable
     {
+        void IApplicationStartable.AfterStart()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IApplicationStartable.BeforeStart()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IApplicationStartable.Start()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

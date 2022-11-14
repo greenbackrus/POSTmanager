@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +7,7 @@ namespace POSTmanager.Helpers
 {
     internal static class GeneralHelper
     {
-        public static void Wait(int MSeconds) 
+        public static void Wait(int MSeconds)
         {
             //TODO: refactor
             Task.Delay(MSeconds).GetAwaiter().GetResult();

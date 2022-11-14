@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using POSTmanager.Helpers;
+using POSTmanager.Models;
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using POSTmanager.Helpers;
 
 namespace POSTmanager.handlers
 {
@@ -31,31 +28,31 @@ namespace POSTmanager.handlers
             // расположение эталонной и базы Рк7 конкретного ресторана
             _basesDirectory = Properties.Settings.Default.Rk7BasesDir;
             _restBaseDirectory = $@"{_basesDirectory}/{restName}";
-        } 
+        }
 
-        private void CopyBaseDir() 
+        private void CopyBaseDir()
         {
             GeneralHelper.CopyDirectory($@"{_basesDirectory}\Rk7Manager", _restBaseDirectory, true);
         }
 
-        private void CreateIniFile()
+        private void CreateIniFile(User currentUser, Rest currentRest)
         {
             //TODO: pass server data from db 
             using (StreamWriter stream = new StreamWriter($@"{_restBaseDirectory}\rk7man.ini", false))
             {
                 stream.Write($@"[REFEDIT]
-                UserName={Login}
-                Client={Login}-%RANDOM%
-                Server={serverName}
+                UserName={currentUser.Login}
+                Client={currentUser.Login}-%RANDOM%
+                Server={currentRest.ServerName}
                 LOCKONEDIT=0
                 LongTimeout=200000
                 [NETKERN]
                 PROTOCOLS=tcpsoc.dll
                 [TCPSOC]
                 LISTEN=0
-                PORT={port}
+                PORT={currentRest.Port}
                 [TCPDNS]
-                {serverName}={ip}:{port}");
+                {currentRest.ServerName}={currentRest.Ip}:{currentRest.Port}");
                 stream.Close();
             }
         }
@@ -106,12 +103,12 @@ namespace POSTmanager.handlers
                 return false;
             }
         }
-       
+
         private void SetupNewRest()
         {
             CopyBaseDir();
             CreateBatFile();
-            CreateIniFile();
+            //CreateIniFile();
         }
 
         public void AfterStart()
