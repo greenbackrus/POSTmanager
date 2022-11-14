@@ -15,7 +15,6 @@ namespace POSTmanager.handlers
         private PmDbContext _context = new PmDbContext();
         private User _user;
         private Rest _rest;
-        private string _windowTitle;
         private string _password;
         private string _basesDirectory;
         private string _restBaseDirectory;
@@ -30,9 +29,6 @@ namespace POSTmanager.handlers
                 .Select(mc => mc.Password)
                 .Single()
                 .ToString();
-
-            // параметры окна для его поиска: класс и наименование 
-            _windowTitle = Properties.Settings.Default.RK7WindowTitleRus;
 
             // расположение эталонной и базы Рк7 конкретного ресторана
             _basesDirectory = Properties.Settings.Default.Rk7BasesDir;
@@ -157,7 +153,7 @@ namespace POSTmanager.handlers
             {
                 return;
             }
-            User32Helper.SetElementText((IntPtr)_passwordField, password);
+            User32Helper.SetElementText((IntPtr)_passwordField, _password);
             _okButton = User32Helper.GetElementWithNameVariants(_panelContainer, "TcxButton", okButtonName);
             // TODO: log, exception?
             if (_okButton == IntPtr.Zero)
