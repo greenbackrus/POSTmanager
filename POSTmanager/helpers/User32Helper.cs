@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace POSTmanager.Helpers
 {
@@ -13,7 +15,7 @@ namespace POSTmanager.Helpers
         private static class User32Lib
         {
             [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-            public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+            public static extern IntPtr FindWindow(string ipClassName, string ipWindowName);
             [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
             public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -25,40 +27,53 @@ namespace POSTmanager.Helpers
             return hWnd != IntPtr.Zero;
         }
 
-        public static IntPtr GetWindowByTitle(String Title)
+        public static IntPtr GetWindowWithTitleVariants(List<string> titles)
         {
-            IntPtr hWindow = User32Lib.FindWindow(null, Title);
-            return hWindow;
-        }
-
-        public static IntPtr GetElement(IntPtr ParentWindow, IntPtr ChildWindow, string ElementClass, string ElementName)
-        {
-            IntPtr El = IntPtr.Zero;
-            int Attempt = 0;
-
-            // TODO: refactor
-            El = User32Lib.FindWindowEx(ParentWindow, IntPtr.Zero, ElementClass, ElementName);
-            while (!IsValidHandle(El) && Attempt < 3)
+            foreach (var title in titles )
             {
-                Task.Delay(1500).GetAwaiter().GetResult();
-                El = User32Lib.FindWindowEx(ParentWindow, IntPtr.Zero, ElementClass, ElementName);
-                Attempt++;
-            };
-
-            return El;
+                IntPtr hWindow = User32Lib.FindWindow(null, title);
+                if (IsValidHandle(hWindow))
+                {
+                    return hWindow;
+                }
+            }
+            return IntPtr.Zero;
         }
 
-        public static void SetElementText(IntPtr Element, String Text)
+        public static IntPtr GetElementByName(IntPtr parentWindow, string elementClass, string elementName)
         {
-            User32Lib.SendMessage((IntPtr)Element, WM_SETTEXT, IntPtr.Zero, Text);
+            IntPtr el = User32Lib.FindWindowEx(parentWindow, IntPtr.Zero, elementClass, elementName);
+            if (IsValidHandle(el))
+            {
+                return el;
+            }
+            return IntPtr.Zero;
         }
 
-        public static void ClickElement(IntPtr Element)
+        public static IntPtr GetElementWithNameVariants(IntPtr parentWindow, string elementClass, List<string> elementNames)
+        {
+            foreach (var elementName in elementNames)
+            {
+                IntPtr el = User32Lib.FindWindowEx(parentWindow, IntPtr.Zero, elementClass, elementName);
+                if (IsValidHandle(el))
+                {
+                    return el;
+                }
+            }
+            return IntPtr.Zero;
+        }
+
+        public static void SetElementText(IntPtr element, String text)
+        {
+            User32Lib.SendMessage((IntPtr)element, WM_SETTEXT, IntPtr.Zero, text);
+        }
+
+        public static void ClickElement(IntPtr element)
         {
             GeneralHelper.Wait(1500);
-            User32Lib.SendMessage((IntPtr)Element, WM_LBUTTONDOWN, IntPtr.Zero, null);
+            User32Lib.SendMessage((IntPtr)element, WM_LBUTTONDOWN, IntPtr.Zero, null);
             GeneralHelper.Wait(500);
-            User32Lib.SendMessage((IntPtr)Element, WM_LBUTTONUP, IntPtr.Zero, null);
+            User32Lib.SendMessage((IntPtr)element, WM_LBUTTONUP, IntPtr.Zero, null);
         }
     }
 }

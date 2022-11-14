@@ -2,14 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="POSTmanager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="RK7WindowTitle" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+    <Setting Name="RK7WindowTitleRus" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">"Вход в систему R-Keeper 7 (станция менеджера) "</Value>
     </Setting>
     <Setting Name="RK7WindowClass" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Rk7BasesDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RK7WindowTitleEng" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">"Login R-Keeper 7 Manager Station "</Value>
     </Setting>
   </Settings>
 </SettingsFile>

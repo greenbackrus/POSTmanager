@@ -25,10 +25,10 @@ namespace POSTmanager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RK7WindowTitle {
+        [global::System.Configuration.DefaultSettingValueAttribute("\"Вход в систему R-Keeper 7 (станция менеджера) \"")]
+        public string RK7WindowTitleRus {
             get {
-                return ((string)(this["RK7WindowTitle"]));
+                return ((string)(this["RK7WindowTitleRus"]));
             }
         }
         
@@ -47,6 +47,15 @@ namespace POSTmanager.Properties {
         public string Rk7BasesDir {
             get {
                 return ((string)(this["Rk7BasesDir"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"Login R-Keeper 7 Manager Station \"")]
+        public string RK7WindowTitleEng {
+            get {
+                return ((string)(this["RK7WindowTitleEng"]));
             }
         }
     }
