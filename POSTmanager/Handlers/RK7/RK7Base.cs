@@ -35,7 +35,7 @@ namespace POSTmanager.handlers
 
             // расположение эталонной и базы Рк7 конкретного ресторана
             _basesDirectory = Properties.Settings.Default.Rk7BasesDir;
-            _restBaseDirectory = $@"{_basesDirectory}/{_restName}";
+            _restBaseDirectory = $@"{_basesDirectory}\{_restName}";
         }
 
         private void CopyBaseDir()
@@ -121,7 +121,7 @@ namespace POSTmanager.handlers
 
         private void LoginRk7(string restName, string password) 
         {
-            string rk7Version = FileVersionInfo.GetVersionInfo($@"{_restBaseDirectory}/rk7man.exe").FileVersion;
+            string rk7Version = FileVersionInfo.GetVersionInfo($@"{_restBaseDirectory}\rk7man.exe").FileVersion;
             // учитывается возможность, что форма может иметь наименование на русском, или английском
             // перечисляем варианты
             var Rk7WindowTitleVariants = new List<string>()
