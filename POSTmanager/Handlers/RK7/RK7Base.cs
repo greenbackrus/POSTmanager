@@ -15,7 +15,7 @@ namespace POSTmanager.handlers
         private PmDbContext _context = new PmDbContext();
         private User _user;
         private Rest _rest;
-        private string _password;
+        UserRest _userRest;
         private string _basesDirectory;
         private string _restBaseDirectory;
         private string _restName;
@@ -24,11 +24,9 @@ namespace POSTmanager.handlers
             _rest = rest;
             _user = user;
             _restName = _rest.Name;
-            _password = _context.UserRests
+            _userRest = _context.UserRests
                 .Where(ur => ur.UserId == _user.Id && ur.RestId == _rest.Id)
-                .Select(mc => mc.Password)
-                .Single()
-                .ToString();
+                .Single();
 
             // расположение эталонной и базы Рк7 конкретного ресторана
             _basesDirectory = Properties.Settings.Default.Rk7BasesDir;
@@ -46,8 +44,8 @@ namespace POSTmanager.handlers
             using (StreamWriter stream = new StreamWriter($@"{_restBaseDirectory}\rk7man.ini", false))
             {
                 stream.Write($@"[REFEDIT]
-                UserName={_user.Login}
-                Client={_user.Login}-%RANDOM%
+                UserName={_userRest.Login}
+                Client={_userRest.Login}-%RANDOM%
                 Server={_rest.ServerName}
                 LOCKONEDIT=0
                 LongTimeout=200000
@@ -153,7 +151,7 @@ namespace POSTmanager.handlers
             {
                 return;
             }
-            User32Helper.SetElementText((IntPtr)_passwordField, _password);
+            User32Helper.SetElementText((IntPtr)_maskEdit, _userRest.Password);
             _okButton = User32Helper.GetElementWithNameVariants(_panelContainer, "TcxButton", okButtonName);
             // TODO: log, exception?
             if (_okButton == IntPtr.Zero)
