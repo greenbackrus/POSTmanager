@@ -15,7 +15,7 @@ namespace POSTmanager.handlers
         private PmDbContext _context = new PmDbContext();
         private User _user;
         private Rest _rest;
-        UserRest _userRest;
+        private UserRest _userRest;
         private string _basesDirectory;
         private string _restBaseDirectory;
         private string _restName;
@@ -114,7 +114,7 @@ namespace POSTmanager.handlers
             CreateIniFile();
         }
 
-        private void LoginRk7(string restName, string password) 
+        private void LoginRk7() 
         {
             string rk7Version = FileVersionInfo.GetVersionInfo($@"{_restBaseDirectory}\rk7man.exe").FileVersion;
             // учитывается возможность, что форма может иметь наименование на русском, или английском
@@ -162,7 +162,7 @@ namespace POSTmanager.handlers
         }
         public void AfterStart()
         {
-            throw new NotImplementedException();
+            LoginRk7();
         }
 
         public void BeforeStart()

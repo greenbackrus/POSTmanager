@@ -175,6 +175,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbContext.cs" />
+    <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\GeneralHelper.cs" />
     <Compile Include="Helpers\User32Helper.cs" />
     <Compile Include="Migrations\20221114134318_CreatePOSTManagerDB.cs" />
@@ -185,8 +186,11 @@
     <Compile Include="Models\UserRestModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\RestModel.cs" />
+    <Compile Include="RestsListWindow.xaml.cs">
+      <DependentUpon>RestsListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="AuthWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -197,10 +201,14 @@
     <Compile Include="Handlers\Iiko\IikoBase.cs" />
     <Compile Include="Handlers\RK7\RK7Base.cs" />
     <Compile Include="Handlers\IApplicationStartable.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="AuthWindow.xaml.cs">
+      <DependentUpon>AuthWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RestsListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
