@@ -202,9 +202,9 @@
       <DependentUpon>RestsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="tmp\AuthHelper.cs" />
-    <Compile Include="tmp\GeneralHelper.cs" />
-    <Compile Include="tmp\User32Helper.cs" />
+    <Compile Include="Helpers\AuthHelper.cs" />
+    <Compile Include="Helpers\GeneralHelper.cs" />
+    <Compile Include="Helpers\User32Helper.cs" />
     <Page Include="AuthWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

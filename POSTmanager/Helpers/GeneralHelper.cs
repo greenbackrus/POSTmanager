@@ -9,7 +9,6 @@ namespace POSTmanager.Helpers
     {
         public static void Wait(int MSeconds)
         {
-            //fix case sensitivity issue
             //TODO: refactor
             Task.Delay(MSeconds).GetAwaiter().GetResult();
         }

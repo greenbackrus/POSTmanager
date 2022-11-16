@@ -11,7 +11,6 @@ namespace POSTmanager.Helpers
         const int WM_SETTEXT = 0x000C;
         const int WM_LBUTTONDOWN = 0x0201;
         const int WM_LBUTTONUP = 0x0202;
-        // fix case sensitivity issue
 
         private static class User32Lib
         {
